@@ -1,0 +1,56 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script type="text/javascript">
+function set_openid(openid, pr)
+{
+    u = openid.search('<username>')
+    if (u != -1) {
+        // openid requires username
+        user = prompt('Enter your ' + pr + ' username:')
+        openid = openid.substr(0, u) + user
+    }
+    form = document.forms['login'];
+    form.elements['openid'].value = openid
+}
+$(document).ready(function() {
+$("#accordion").accordion();
+});
+</script>
+
+<div id="accordion">
+    <h3> What is Treefort? </h3>
+    <div>
+        <p> Good thing you are curious as to what Treefort is because so are we!</p>
+    </div>
+    <h3> Creators </h3>
+    <div>
+        <p> Ian Sutton - Army man ready to gudo stomp fools and terrorists<br>
+        Sai Gunasegaran - Major's lab monitor monitoring those keyboard monkeys<br>
+        Matthew Bartling - Enjoys long codes on his pc and easily weeps when bugfixes are literaly one key fixes
+        </p>
+    </div>
+    <h3> Features </h3>
+    <div>
+        Treefort features login, blogging, timed messaging and other fun stuff waiting to be added!
+    </div>
+</div>
+<h3>Sign In</h3>
+<form action="" method="post" name="login">
+    {{ form.hidden_tag() }}
+    <p>
+        Please enter your OpenID, or select one of the providers below:<br>
+        {{ form.openid(size=80) }}
+        {% for error in form.openid.errors %}
+          <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        |{% for pr in providers %}
+          <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a> |
+        {% endfor %}
+    </p>
+    <p>{{ form.remember_me }} Remember Me</p>
+    <p><input type="submit" value="Sign In"></p>
+</form>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Hi, {{ g.user.nickname }}!</h1>
+  <h2>Inbox </h2>
+  <a href="{{ url_for('compose') }}"> Compose<br></a>
+{% for msg in messages.items %}
+    {% include 'message.html' %}
+    <a href="{{ url_for('compose', nickname=msg.author.nickname, id=msg.id) }}">Reply</a>
+    | <a href="{{ url_for('inbox', page=messages.page, id=msg.id) }}">Delete</a>
+    | Response Time Left: <h4>{{msg.lifetime}}</h4>
+{% endfor %}
+
+    {% if messages.has_prev %}<a href="{{ url_for('inbox', page=messages.prev_num) }}"><< Newer posts</a>{% else %}<< Newer posts{% endif %} | 
+    {% if messages.has_next %}<a href="{{ url_for('inbox',page=messages.next_num) }}">Older posts >></a>{% else %}Older posts >>{% endif %}
+
+{% endblock %}

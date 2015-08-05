@@ -1,0 +1,67 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <!-- PROPER WAY TO USEJS SCRIPT-->
+  <!--<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script> -->
+
+  <script type="text/javascript">
+  var sec = {{reply}}
+  function tick() {
+  sec-=1;
+  var  displayTime = document.getElementById("time");
+  displayTime.innerHTML = sec;
+    if (sec === 0) {
+       clearInterval(intervalHandle);
+     }
+  }
+
+  $(document).ready (function() {
+    intervalHandle = setInterval(tick, 1000);
+
+  });
+
+  $(function() {
+    $('#send').bind('click'), function() {
+      $.getJSON('/_messaged'), {
+        a: 2
+      }, function(data {
+          $("#display").text(data.result);
+      });
+
+    });
+    return false;
+  });
+
+
+  </script>
+  <h1 id="display">Hi, {{ g.user.nickname }}!</h1>
+  Reply In: <td> <h4 id="time">{{reply}}<h4> </td>
+  <form action="" method="post" name="compose">
+      {{ form.hidden_tag() }}
+      <table>
+          <tr>
+              <td>To:</td>
+              <td>{{ form.nickname(size=30, maxlength=64) }} </td>
+              <td>Subject:</td>
+              <td>{{ form.subject(size=30, maxlength=30) }} </td>
+              <td> Message: </td>
+              <td>{{ form.body(size=30, maxlength=120) }}</td>
+              <td>Leafs Offered: </td>
+              <td>{{ form.leafs(size=30, maxlength=30) }}</td>
+              <td>
+              {% for error in form.body.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+
+          </tr>
+          <tr>
+              <td></td>
+              <td><input id="send" type="submit" value="Send"></td>
+              <td></td>
+          </tr>
+      </table>
+  </form>
+
+{% endblock %}
