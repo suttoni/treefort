@@ -21,22 +21,25 @@ stylesheet*/
 }
 
 /* nav-bar design */
-.navbar-simple .brand {
+/* nav-bar design */
+#nav {
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.navbar-simple .navbar-inner {
-  background: #fff;
+#nav  {
+  background-color: #FFCC33;
+  color: #fffff0;
   filter: none !important;
   box-shadow: 0 2px 15px rgba(0,0,0,0.25);
   -moz-box-shadow: 0 2px 15px rgba(0,0,0,0.25);
   -webkit-box-shadow: 0 2px 15px rgba(0,0,0,0.25);
   border-bottom: 1px solid rgba(0,0,0,0.2);
+ 
 }
-.navbar-simple .navbar-inner .nav {
-  float: right;
+#nav {
+  float: left;
 }
-.navbar-simple .navbar-inner .nav li a {
+#nav li a {
   background: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -46,14 +49,31 @@ stylesheet*/
   padding-top: 15px;
   padding-bottom: 15px;
   font-weight: 600;
+  
 }
-.navbar-simple .navbar-inner .nav li a:hover {
+#nav li a:hover {
   background: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
   color: #bf3604;
 }   
-.navbar-simple .navbar-inner .nav li.active a {
+#nav li.active a {
   color: #bf3604;
+}
+
+li {
+  float: left
+}
+
+a:link, a:visited {
+    display: block;
+    width: 120px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #98bf21;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
 }
