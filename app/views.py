@@ -9,7 +9,7 @@ from config import POSTS_PER_PAGE,  MSGS_PER_PAGE
 import math
 import twilio.twiml
 
-#nav bar
+#navigation bar
 nav.Bar('top', [
     nav.Item('Home', 'index'),
     nav.Item('Login', 'login')
